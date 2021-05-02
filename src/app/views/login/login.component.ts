@@ -2,15 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
-import { AlertConfig } from 'ngx-bootstrap/alert';
 import { AuthService } from "../../core/auth/auth.service";
+import { AlertService } from '../alert';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: 'login.component.html'
 })
-
-
 
 export class LoginComponent implements OnInit {
   message: string;
@@ -19,12 +17,18 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
   loginFailed: boolean;
 
+  options = {
+    autoClose: false,
+    keepAfterRouteChange: false
+  };
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    protected alertService: AlertService
   ) {
     // redirect to home if already logged in
     if (this.authService.currentUserValue) {
@@ -51,10 +55,17 @@ export class LoginComponent implements OnInit {
   }
 
   oauth2Login() {
+
+    this.submitted = true;
+
+    if (!this.loginForm.valid)
+      return;
+
     this.loginFailed = false;
     this.spinner.show();
     this.authService.oauthLogin(this.f.username.value, this.f.password.value).subscribe(
       response => {
+        console.log(JSON.stringify(response));
         if (response["access_token"]) {
           this.router.navigate(['/dashboard']);
 
@@ -75,7 +86,7 @@ export class LoginComponent implements OnInit {
         }
       },
       error => {
-        console.log(error);
+        this.alertService.error('invalid user or password', this.options);
         this.loginFailed = true;
         this.spinner.hide();
       },

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http" 
-import {BehaviorSubject, Observable} from "rxjs";
-import {map} from "rxjs/operators";
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from "@angular/common/http" 
+import {BehaviorSubject, Observable, throwError} from "rxjs";
+import {catchError, map} from "rxjs/operators";
 import {OAUTH2_ACCESS_TOKEN_URI, OAUTH2_CLIENT_ID, OAUTH2_CLIENT_SECRET, SERVER_API_URL} from "../../app.constants";
 import {User} from "../user/model/user";
 
@@ -25,39 +25,13 @@ export class AuthService {
   redirectUrl: string;
   public currentUser: Observable<User>;
   public currentUserSubject: BehaviorSubject<User>;
+  public EMPTY = "";
 
   static isUserLoggedIn(): boolean
   {
     return localStorage.getItem( 'isLoggedIn' )==='true';
   }
   
-
-  // login(username: string, password: string): Observable<any>
-  // {
-  //   const httpOptions={
-  //     headers: new HttpHeaders(
-  //       {
-  //         'Content-Type': 'application/json',
-  //         authorization: 'Basic '+btoa( username+':'+password )
-  //       } )
-  //   };
-
-
-  //   return this.httpClient.get<any>( SERVER_API_URL+'login', httpOptions)
-  //     .pipe( map( user =>
-  //     {
-  //       // login successful if user id exists
-  //       if (user.id)
-  //       {
-  //         // store user details and Spring Session token in local storage to keep user logged in between page refreshes
-  //         localStorage.setItem( 'currentUser', JSON.stringify( user ) );
-  //         localStorage.setItem( 'isLoggedIn', 'true' );
-  //         this.currentUserSubject.next( user );
-  //       }
-  //       return user;
-  //     }));
-  // }
-
   oauthLogin(username: string, password: string)
   {
     const httpOptions={
@@ -74,7 +48,7 @@ export class AuthService {
       .set('password', password)
       .set("client_id", "mobile");
 
-    return this.httpClient.post<any>(OAUTH2_ACCESS_TOKEN_URI, body.toString(), httpOptions);
+    return this.httpClient.post<any>(OAUTH2_ACCESS_TOKEN_URI, body.toString(), httpOptions).pipe(catchError(this.errorHandler));
   }
 
   getUserInfoUsingOAuth2Token(accessToken: any)
@@ -111,4 +85,21 @@ export class AuthService {
     localStorage.setItem( 'isLoggedIn', 'false' );
   }
 
+
+  errorHandler(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error.message);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      console.error(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.message}`);    }
+    // return an observable with a user-facing error message
+    return throwError(
+      'Something bad happened; please try again later.');
+  }
 }
+
+

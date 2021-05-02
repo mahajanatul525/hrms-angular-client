@@ -10,6 +10,7 @@ import { IconModule, IconSetModule, IconSetService } from '@coreui/icons-angular
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { httpInterceptorProviders } from "./core/intercepters/httpInterceptorProviders";
 import { NgxSpinnerModule } from 'ngx-spinner';
+import {NgxDatatableModule} from '@tusharghoshbd/ngx-datatable'
 
 
 
@@ -21,14 +22,15 @@ import { AppComponent } from './app.component';
 
 // Import containers
 import { DefaultLayoutComponent } from './containers';
-
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { EmployeeComponent } from './views/employee/employee.component'
 import { DataTablesModule } from "angular-datatables"
-import { AlertModule } from 'ngx-bootstrap/alert';
+import { BasicComponent } from './views/basic/basic.component'
+import {AlertComponentCustom} from './views/alert/alert.component'
+import { AppService } from './app.service'
 
 const APP_CONTAINERS = [
   DefaultLayoutComponent
@@ -49,6 +51,8 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
+//import { AlertModule } from 'ngx-bootstrap/alert';
+
 
 @NgModule({
   imports: [
@@ -71,7 +75,8 @@ import { ChartsModule } from 'ng2-charts';
     ReactiveFormsModule,
     DataTablesModule,
     NgxSpinnerModule,
-    AlertModule.forRoot()
+    NgxDatatableModule,
+    //AlertModule.forRoot()
   ],
   declarations: [
     AppComponent,
@@ -80,15 +85,19 @@ import { ChartsModule } from 'ng2-charts';
     P500Component,
     LoginComponent,
     RegisterComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    BasicComponent,
+    AlertComponentCustom
   ],
   providers: [
     {
       provide: LocationStrategy,
-      useClass: HashLocationStrategy
+      useClass: HashLocationStrategy,
+
     },
     IconSetService,
-    httpInterceptorProviders
+    httpInterceptorProviders,
+    AppService
   ],
   bootstrap: [AppComponent]
 })

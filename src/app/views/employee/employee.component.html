@@ -6,38 +6,28 @@
           <i class="fa fa-align-justify"></i> Combined All Table
         </div>
         <div class="card-body">
-          <table class="table table-bordered table-striped table-sm">
+          <table datatable [dtOptions]="dtOptions" class="row-border hover">
+            <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "default" color = "#fff" type = "timer" [fullScreen] = "false"><p style="color: white" > Logging you in.. Please wait </p></ngx-spinner>
             <thead>
-              <tr >
-                <th>Username</th>
-                <th>Date registered</th>
-                <th>Role</th>
-                <th>Status</th>
+              <tr>
+                <!-- <th>ID</th>
+                <th>First name</th>
+                <th>Last name</th> -->
               </tr>
             </thead>
-            <tbody>
-              <tr *ngFor="let product of products">
-                <td>{{product.firstName + " " +product.lastName}}</td>
-                <td>{{product.birthDate}}</td>
-                <td>Member</td>
-                <td>
-                  <span class="badge badge-success">Active</span>
-                </td>
+              <tbody *ngIf="employees?.length != 0">
+                <tr *ngFor="let employee of employees">
+                  <td>{{ employee.employeeId }}</td>
+                  <td>{{ employee.firstName }}</td>
+                  <td>{{ employee.lastName }}</td>
+                </tr>
+              </tbody>
+            <tbody *ngIf="employees?.length == 0">
+              <tr>
+                <!-- <td colspan="3" class="no-data-available">No data!</td> -->
               </tr>
             </tbody>
           </table>
-          <nav>
-            <ul class="pagination">
-              <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-              <li class="page-item active">
-                <a class="page-link" href="#">1</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">4</a></li>
-              <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
-          </nav>
         </div>
       </div>
     </div>

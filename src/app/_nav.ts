@@ -4,25 +4,22 @@ export const navItems: INavData[] = [
   {
     name: 'Dashboard',
     url: '/dashboard',
-    icon: 'icon-speedometer',
-    badge: {
-      variant: 'info',
-      text: 'NEW'
-    }
-  },
-  {
-    title: true,
-    name: 'MANAGE EMPLOYEES'
-  },
-  {
-    name: 'Show Employees',
-    url: '/employees',
     icon: 'icon-speedometer'
   },
   {
-    title: true,
-    name: 'Theme'
+    name: 'Manage Employees',
+    url: '/employees',
+    icon: 'icon-grid'
   },
+  {
+    name: 'NGX',
+    url: '/ngtable',
+    icon: 'icon-grid'
+  },
+  // {
+  //   title: true,
+  //   name: 'Theme'
+  // },
   {
     name: 'Colors',
     url: '/theme/colors',
@@ -33,10 +30,10 @@ export const navItems: INavData[] = [
     url: '/theme/typography',
     icon: 'icon-pencil'
   },
-  {
-    title: true,
-    name: 'Components'
-  },
+  // {
+  //   title: true,
+  //   name: 'Components'
+  // },
   {
     name: 'Base',
     url: '/base',
@@ -242,19 +239,19 @@ export const navItems: INavData[] = [
     },
     attributes: { disabled: true },
   },
-  {
-    name: 'Download CoreUI',
-    url: 'http://coreui.io/angular/',
-    icon: 'icon-cloud-download',
-    class: 'mt-auto',
-    variant: 'success',
-    attributes: { target: '_blank', rel: 'noopener' }
-  },
-  {
-    name: 'Try CoreUI PRO',
-    url: 'http://coreui.io/pro/angular/',
-    icon: 'icon-layers',
-    variant: 'danger',
-    attributes: { target: '_blank', rel: 'noopener' }
-  }
+  // {
+  //   name: 'Download CoreUI',
+  //   url: 'http://coreui.io/angular/',
+  //   icon: 'icon-cloud-download',
+  //   class: 'mt-auto',
+  //   variant: 'success',
+  //   attributes: { target: '_blank', rel: 'noopener' }
+  // },
+  // {
+  //   name: 'Try CoreUI PRO',
+  //   url: 'http://coreui.io/pro/angular/',
+  //   icon: 'icon-layers',
+  //   variant: 'danger',
+  //   attributes: { target: '_blank', rel: 'noopener' }
+  // }
 ];
