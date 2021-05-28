@@ -42,8 +42,6 @@ export class ErrorInterceptor implements HttpInterceptor
       })
     );
 
-
-
     // return next.handle( request ).pipe( catchError( err =>
     // {
 
@@ -53,6 +51,7 @@ export class ErrorInterceptor implements HttpInterceptor
     //     this.authService.logout();
     //     this.router.navigate( ['/login'] );
     //   }
+    
     //   if(err.status===403)
     //   {
     //     console.log('Inside ErrorInterceptor, Http Status: 403');
@@ -77,10 +76,6 @@ export class ErrorInterceptor implements HttpInterceptor
     //   let error=err.error.message||err.error;
     //   return throwError( error );
     // })
-
-
-
-    
     //);
   }
 }

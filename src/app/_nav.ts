@@ -12,8 +12,8 @@ export const navItems: INavData[] = [
     icon: 'icon-grid'
   },
   {
-    name: 'NGX',
-    url: '/ngtable',
+    name: 'Datatable',
+    url: '/datatable',
     icon: 'icon-grid'
   },
   // {

@@ -8,8 +8,7 @@ import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { AuthGuard } from '../app/guards/auth.guard';
-import { EmployeeComponent } from '../app/views/employee/employee.component';
-import {BasicComponent} from '../app/views/basic/basic.component'
+import { EmployeeComponent } from './views/employee/employee.component';
 
 
 export const routes: Routes = [
@@ -94,11 +93,7 @@ export const routes: Routes = [
       {
         path: 'employees',
         component:EmployeeComponent
-      },
-      {
-        path: 'ngtable',
-        component:BasicComponent
-      },
+      }
     ]
   },
   { path: '**', component: P404Component }

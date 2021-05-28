@@ -3,35 +3,52 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header">
-          <i class="fa fa-align-justify"></i> Combined All Table
+          <i class="fa fa-align-justify"></i> List of Employees
         </div>
         <div class="card-body">
-          <table datatable [dtOptions]="dtOptions" class="row-border hover">
-            <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "default" color = "#fff" type = "timer" [fullScreen] = "false"><p style="color: white" > Logging you in.. Please wait </p></ngx-spinner>
-            <thead>
-              <tr>
-                <!-- <th>ID</th>
-                <th>First name</th>
-                <th>Last name</th> -->
-              </tr>
-            </thead>
-              <tbody *ngIf="employees?.length != 0">
-                <tr *ngFor="let employee of employees">
-                  <td>{{ employee.employeeId }}</td>
-                  <td>{{ employee.firstName }}</td>
-                  <td>{{ employee.lastName }}</td>
-                </tr>
-              </tbody>
-            <tbody *ngIf="employees?.length == 0">
-              <tr>
-                <!-- <td colspan="3" class="no-data-available">No data!</td> -->
-              </tr>
-            </tbody>
-          </table>
+          <div class="float-right">
+            <div class="form-group row flot-right">
+              <div class="col-md-12">
+                <div class="input-group">
+                  <input type="text" id="input1-group2" name="input1-group2" class="form-control"
+                    placeholder="Search employees " #input>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <table mat-table [dataSource]="dataSource" class="table table-bordered table-striped" matSort>
+              <ng-container matColumnDef="employeeId">
+                <th *matHeaderCellDef> Employee ID </th>
+                <td *matCellDef="let element"> {{element.employeeId}} </td>
+                <mat-spinner></mat-spinner>
+              </ng-container>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="firstName">
+                <th *matHeaderCellDef mat-sort-header> First Name </th>
+                <td *matCellDef="let element"> {{element.firstName + ' ' + element.lastName}} </td>
+              </ng-container>
+
+              <!-- Weight Column -->
+              <ng-container matColumnDef="lastName">
+                <th *matHeaderCellDef> Last Name </th>
+                <td *matCellDef="let element"> {{element.lastName}} 
+                  
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+          <div>
+            <ngx-spinner size="default" type="ball-spin-clockwise" [fullScreen]="false">
+              <p style="color: white">Please Wait. </p>
+            </ngx-spinner>
+          </div> 
+          <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"></mat-paginator>
         </div>
       </div>
     </div>
-    <!--/.col-->
   </div>
-  <!--/.row-->
 </div>

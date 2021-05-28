@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy, CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -10,7 +10,8 @@ import { IconModule, IconSetModule, IconSetService } from '@coreui/icons-angular
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { httpInterceptorProviders } from "./core/intercepters/httpInterceptorProviders";
 import { NgxSpinnerModule } from 'ngx-spinner';
-import {NgxDatatableModule} from '@tusharghoshbd/ngx-datatable'
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import{NgxPaginationModule} from 'ngx-pagination'
 
 
 
@@ -26,9 +27,6 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
-import { EmployeeComponent } from './views/employee/employee.component'
-import { DataTablesModule } from "angular-datatables"
-import { BasicComponent } from './views/basic/basic.component'
 import {AlertComponentCustom} from './views/alert/alert.component'
 import { AppService } from './app.service'
 
@@ -53,6 +51,19 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 //import { AlertModule } from 'ngx-bootstrap/alert';
 
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from "@angular/material/input";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { DataTablesModule } from 'angular-datatables';
+import { EmployeeComponent } from './views/employee/employee.component';
+
+
+
+
+
 
 @NgModule({
   imports: [
@@ -73,10 +84,19 @@ import { ChartsModule } from 'ng2-charts';
     IconSetModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    DataTablesModule,
     NgxSpinnerModule,
-    NgxDatatableModule,
-    //AlertModule.forRoot()
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
+    PaginationModule.forRoot(),
+    NgxPaginationModule,
+    DataTablesModule,
+    
+
+    
   ],
   declarations: [
     AppComponent,
@@ -86,8 +106,7 @@ import { ChartsModule } from 'ng2-charts';
     LoginComponent,
     RegisterComponent,
     EmployeeComponent,
-    BasicComponent,
-    AlertComponentCustom
+    AlertComponentCustom,
   ],
   providers: [
     {
