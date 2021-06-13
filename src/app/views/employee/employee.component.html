@@ -16,38 +16,105 @@
               </div>
             </div>
           </div>
-          <div>
-            <table mat-table [dataSource]="dataSource" class="table table-bordered table-striped" matSort>
-              <ng-container matColumnDef="employeeId">
-                <th *matHeaderCellDef> Employee ID </th>
-                <td *matCellDef="let element"> {{element.employeeId}} </td>
-                <mat-spinner></mat-spinner>
-              </ng-container>
+          <table mat-table [dataSource]="dataSource" class=" table table-responsive w-100 d-block d-md-table table-bordered " matSort>
 
-              <!-- Name Column -->
-              <ng-container matColumnDef="firstName">
-                <th *matHeaderCellDef mat-sort-header> First Name </th>
-                <td *matCellDef="let element"> {{element.firstName + ' ' + element.lastName}} </td>
-              </ng-container>
+            <!-- Employee Id Column -->
+            <ng-container matColumnDef="employeeId">
+              <th *matHeaderCellDef> Employee ID </th>
+              <td *matCellDef="let element">
+                <div *ngIf="loadcomplete">{{element.employeeId}}</div>
+                <div *ngIf="!loadcomplete">
+                  <ngx-skeleton-loader count="1"></ngx-skeleton-loader>
+                </div>
+              </td>
+            </ng-container>
 
-              <!-- Weight Column -->
-              <ng-container matColumnDef="lastName">
-                <th *matHeaderCellDef> Last Name </th>
-                <td *matCellDef="let element"> {{element.lastName}} 
-                  
-                </td>
-              </ng-container>
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th *matHeaderCellDef mat-sort-header> Name </th>
+              <td *matCellDef="let element">
+                <ng-template [ngTemplateOutlet]="loadcomplete ? colName:showSkeleton"
+                  [ngTemplateOutletContext]="{data:element}"> </ng-template>
+              </td>
+            </ng-container>
+
+            <!-- Email Column -->
+            <ng-container matColumnDef="email">
+              <th *matHeaderCellDef>Email</th>
+              <td *matCellDef="let element">
+                <ng-template [ngTemplateOutlet]="loadcomplete ? colEmail:showSkeleton"
+                  [ngTemplateOutletContext]="{data:element.emailAddresses}"> </ng-template>
+              </td>
+            </ng-container>
+
+            <!-- Phone Column -->
+            <ng-container matColumnDef="phone">
+              <th *matHeaderCellDef>Phone</th>
+              <td *matCellDef="let element">
+                <ng-template [ngTemplateOutlet]="loadcomplete ? colPhone:showSkeleton"
+                  [ngTemplateOutletContext]="{data:element.phoneNumbers}"> </ng-template>
+              </td>
+            </ng-container>
+
+            <!-- Department Column -->
+            <ng-container matColumnDef="department">
+              <th *matHeaderCellDef>Department</th>
+              <td *matCellDef="let element">
+                <ng-template [ngTemplateOutlet]="loadcomplete ? colDept:showSkeleton"
+                  [ngTemplateOutletContext]="{data:'N/A'}"> </ng-template>
+              </td>
+            </ng-container>
+
+            <!-- Type Column -->
+            <ng-container matColumnDef="actions">
+              <th *matHeaderCellDef>Actions</th>
+              <td *matCellDef="let element">
+                <ng-template [ngTemplateOutlet]="loadcomplete ? colType:showSkeleton"
+                  [ngTemplateOutletContext]="{data:'N/A'}"> </ng-template>
+              </td>
+            </ng-container>
+            
+            <thead>
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            </thead>
+            <tbody>
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-          </div>
-          <div>
-            <ngx-spinner size="default" type="ball-spin-clockwise" [fullScreen]="false">
-              <p style="color: white">Please Wait. </p>
-            </ngx-spinner>
-          </div> 
-          <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"></mat-paginator>
+            </tbody>
+           
+          </table>
+          <div *ngIf="length == 0" class="centre">No records found </div>
         </div>
+
+        <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"></mat-paginator>
+
+        <ng-template #colName let-data="data">
+          <span *ngIf="loadcomplete">{{data.firstName +" "+ data.lastName}}</span>
+        </ng-template>
+
+        <ng-template #colEmail let-data="data">
+          <span *ngIf="loadcomplete ">{{data[0].address}}</span>
+        </ng-template>
+
+        <ng-template #colPhone let-data="data">
+          <span *ngIf="loadcomplete">{{data[0].number}}</span>
+        </ng-template>
+
+        <ng-template #colDept let-data="data">
+          <span *ngIf="loadcomplete"> - </span>
+        </ng-template>
+
+        <ng-template #colType let-data="data">
+          <div class="btn-group" *ngIf="loadcomplete"> 
+            <a  data-toggle="tooltip" data-placement="top" title="show details" data-id=' + data + ' type="button" class="btn btn-default btn-sm emp-info"><i class="text-primary fa fa-info-circle fa-lg"></i></a>
+            <a  data-toggle="tooltip" data-placement="top" title="update" href="/employees/update-employee/' + data + '" type="button" class="btn btn-default btn-sm "><i  class="text-info fa fa-pencil-square-o fa-lg"></i></a>
+            <a  data-toggle="tooltip" data-placement="top" title="delete" href="#" data-id=' + data + ' type="button" class="btn btn-default btn-sm emp-delete"><i style="color:red"  class="fa fa-trash-o fa-lg"></i></a>
+          </div>
+        </ng-template>
+
+        <ng-template #showSkeleton>
+          <ngx-skeleton-loader count="1"></ngx-skeleton-loader>
+        </ng-template>
+
       </div>
     </div>
   </div>

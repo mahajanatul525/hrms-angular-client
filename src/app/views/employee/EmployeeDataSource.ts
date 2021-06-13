@@ -1,9 +1,10 @@
 import { DataSource } from '@angular/cdk/table';
-import { Employee } from './employee';
+// import { Employee } from './employee';
 import { CollectionViewer } from '@angular/cdk/collections';
 import { Observable, BehaviorSubject, of } from "rxjs";
 import { catchError, finalize } from "rxjs/operators";
 import {EmployeeService} from '../../services/employee.service';
+import { Employee } from './employee.model';
 
 
 export class EmployeeDataSource implements DataSource<Employee> {
@@ -27,11 +28,11 @@ export class EmployeeDataSource implements DataSource<Employee> {
         this.countSubject.complete();
     }
 
-    loadEmployees(filter = '', sortDirection ='asc', pageIndex = 0, pageSize = 10) {
+    loadEmployees(filter = '', activeSortCol = '',sortDirection ='asc', pageIndex = 0, pageSize = 10) {
 
         this.loadingSubject.next(true);
         
-        this.employeeService.findEmployees(filter,sortDirection,pageIndex,pageSize)
+        this.employeeService.findEmployees(filter,activeSortCol,sortDirection,pageIndex,pageSize)
             .pipe(
                 catchError(() => of([])),
                 finalize(() => this.loadingSubject.next(false))

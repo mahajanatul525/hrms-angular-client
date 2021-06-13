@@ -4,5 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  authorizationServerUrl:"",
+  endpoint_EmployeesBypage:'http://localhost:8084/services/employees-page/' 
 };

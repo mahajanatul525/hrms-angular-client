@@ -59,6 +59,8 @@ import { MatInputModule } from "@angular/material/input";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { DataTablesModule } from 'angular-datatables';
 import { EmployeeComponent } from './views/employee/employee.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { EmployeeFormComponent } from './views/employee/employee-form/employee-form.component';
 
 
 
@@ -85,6 +87,7 @@ import { EmployeeComponent } from './views/employee/employee.component';
     FormsModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
+    
     MatPaginatorModule,
     MatTableModule,
     MatSortModule,
@@ -94,7 +97,7 @@ import { EmployeeComponent } from './views/employee/employee.component';
     PaginationModule.forRoot(),
     NgxPaginationModule,
     DataTablesModule,
-    
+    NgxSkeletonLoaderModule
 
     
   ],
@@ -106,6 +109,7 @@ import { EmployeeComponent } from './views/employee/employee.component';
     LoginComponent,
     RegisterComponent,
     EmployeeComponent,
+    EmployeeFormComponent,
     AlertComponentCustom,
   ],
   providers: [

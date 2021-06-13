@@ -12,8 +12,8 @@ export const navItems: INavData[] = [
     icon: 'icon-grid'
   },
   {
-    name: 'Datatable',
-    url: '/datatable',
+    name: 'Add Employee',
+    url: '/add-employee',
     icon: 'icon-grid'
   },
   // {

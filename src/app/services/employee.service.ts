@@ -1,27 +1,26 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Employee } from '../views/employee/employee';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class EmployeeService {
-
+  
   constructor(private http: HttpClient) { }
 
   findEmployees(
-    filter = '', sortOrder = 'asc',
+    filter = '', sortBy = '',sortOrder = 'asc',
     pageNumber = 0, pageSize = 10) {
 
-    const endpoint = 'http://localhost:8084/services/employees-page/';
+      sortBy = 'firstName';
 
-    return this.http.get(endpoint, {
+    return this.http.get(environment.endpoint_EmployeesBypage, {
       params: new HttpParams()
         .set('filter', filter)
-        //.set('sortOrder', sortOrder)
+        .set('sortBy', sortBy)
+        .set('sortOrder', sortOrder)
         .set('pageNumber', pageNumber.toString())
         .set('pageSize', pageSize.toString())
     }).pipe(

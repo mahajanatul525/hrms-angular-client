@@ -9,6 +9,7 @@ import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { AuthGuard } from '../app/guards/auth.guard';
 import { EmployeeComponent } from './views/employee/employee.component';
+import { EmployeeFormComponent } from './views/employee/employee-form/employee-form.component';
 
 
 export const routes: Routes = [
@@ -93,7 +94,11 @@ export const routes: Routes = [
       {
         path: 'employees',
         component:EmployeeComponent
-      }
+      },
+      {
+        path: 'add-employee',
+        component:EmployeeFormComponent
+      },
     ]
   },
   { path: '**', component: P404Component }
