@@ -61,6 +61,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { EmployeeComponent } from './views/employee/employee.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { EmployeeFormComponent } from './views/employee/employee-form/employee-form.component';
+import { AddressFormComponent } from './views/employee/address-form/address-form.component';
 
 
 
@@ -110,6 +111,7 @@ import { EmployeeFormComponent } from './views/employee/employee-form/employee-f
     RegisterComponent,
     EmployeeComponent,
     EmployeeFormComponent,
+    AddressFormComponent,
     AlertComponentCustom,
   ],
   providers: [

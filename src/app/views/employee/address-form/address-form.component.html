@@ -1,3 +1,39 @@
-<p>
-  address-form works!
-</p>
+<form [formGroup]="addressForm" >
+  <label for="country">Address ({{addressForm.get('addressType').value}})</label><button (click)="delete()">Delete</button>
+  <div class="row">
+    <div class="form-group col-sm-6">
+      <input type="text" class="form-control" id="line1" placeholder="Flat, House no.,Building, Company, Apartment"
+        formControlName="line1">
+    </div>
+    <div class="form-group col-sm-6">
+      <input type="text" class="form-control" id="line2" placeholder="Area, Colony,Street,Sector,Village"
+        formControlName="line2">
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm-6">
+      <input type="text" class="form-control" id="pin" placeholder="zipCode/PinCode"
+        formControlName="zipCode">
+    </div>
+    <div class="form-group col-sm-6">
+      <input type="text" class="form-control" id="Locality" placeholder="Locality"
+        formControlName="locality">
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm-6">
+      <input type="text" class="form-control" id="District" placeholder="District"
+        formControlName="district">
+    </div>
+    <div class="form-group col-sm-6">
+      <input type="text" class="form-control" id="state" placeholder="State"
+        formControlName="state">
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm-6">
+      <input type="text" class="form-control" id="Country" placeholder="Country"
+        formControlName="country">
+    </div>
+  </div>
+</form>

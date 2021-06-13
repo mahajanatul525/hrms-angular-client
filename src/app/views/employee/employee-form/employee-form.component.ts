@@ -17,7 +17,8 @@ export class EmployeeFormComponent implements OnInit {
   maritalStatus = ['Single', 'Married', 'Divorced','Widowed'];
   submitted = false;
   employee = new Employee();
-
+  address = new Address();
+  addresstemp = new Address();
   constructor(
     private formBuilder: FormBuilder
   ) { }
@@ -25,11 +26,18 @@ export class EmployeeFormComponent implements OnInit {
   ngOnInit() {
 
     this.employee.salutation = this.saluatations[0];
+    this.employee.gender = this.genders[0];
+    this.employee.maritalStatus = this.maritalStatus[0];
+
+    this.address.addressType = "Permanent";
+    this.addresstemp.addressType = "Temp";
+
 
     this.form = this.formBuilder.group(new EmployeeForm(this.employee));
 
-    this.addAddress();
-
+    this.addAddress(this.address);
+    this.addAddress(this.addresstemp);
+    
     this.form.valueChanges.subscribe(value => {
       console.log(JSON.stringify(value));
     });
@@ -42,9 +50,9 @@ export class EmployeeFormComponent implements OnInit {
     return this.form.get('addresses') as FormArray; 
   }
 
-  addAddress() {
+  addAddress(add : Address) {
     (this.form.get('addresses') as FormArray).push(
-      this.formBuilder.group(new AddressForm(new Address))
+      this.formBuilder.group(new AddressForm(add))
     )
   }
 
@@ -55,6 +63,10 @@ export class EmployeeFormComponent implements OnInit {
 
 
   }
-
+  deletePlayer(index: number) {
+    (this.form.get('addresses') as FormArray).removeAt(
+     index
+    )
+  }
 
 }

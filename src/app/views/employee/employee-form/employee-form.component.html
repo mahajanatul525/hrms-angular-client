@@ -76,11 +76,7 @@
                 <div formArrayName="addresses">
                   <div *ngFor="let address of Addresses.controls; let i=index">
                     <div [formGroupName]="i">
-                      <div class="form-group">
-                        <label for="country">Country</label>
-                        <input type="text" class="form-control" id="country" placeholder="Country name"
-                          formControlName="line1">
-                      </div>
+                      <app-address-form [index]="i" [addressForm]="address" (deletePlayer)="deletePlayer($event)"></app-address-form>
                     </div>
                   </div>
                 </div>
