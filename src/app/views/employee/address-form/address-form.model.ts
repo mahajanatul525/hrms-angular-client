@@ -13,8 +13,13 @@ export class AddressForm {
     state = new FormControl();
     country = new FormControl();
     addressType = new FormControl();
+    isRemoveble:Boolean;
 
     constructor(address: Address) {
+        
+        this.isRemoveble = address.isRemoveble;
+        this.addressType.setValue(address.addressType ? address.addressType : 'Permanent');
+
         if (address.addressId) 
             this.addressId.setValue(address.addressId);
 
@@ -45,7 +50,5 @@ export class AddressForm {
         if (address.district) 
             this.district.setValue(address.district);
 
-        if (address.addressType) 
-            this.addressType.setValue(address.addressType);
     }
 }

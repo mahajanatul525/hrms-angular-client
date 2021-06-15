@@ -17,8 +17,11 @@ export class EmployeeFormComponent implements OnInit {
   maritalStatus = ['Single', 'Married', 'Divorced','Widowed'];
   submitted = false;
   employee = new Employee();
-  address = new Address();
-  addresstemp = new Address();
+  //address = new Address();
+
+  allowUsertoAddEmail:Boolean = true;
+  allowUsertoAddPhone:Boolean = true;
+  allowUsertoAddAddress:Boolean = false;
   constructor(
     private formBuilder: FormBuilder
   ) { }
@@ -29,14 +32,13 @@ export class EmployeeFormComponent implements OnInit {
     this.employee.gender = this.genders[0];
     this.employee.maritalStatus = this.maritalStatus[0];
 
-    this.address.addressType = "Permanent";
-    this.addresstemp.addressType = "Temp";
+    //this.address.addressType = "Permanent";
 
 
     this.form = this.formBuilder.group(new EmployeeForm(this.employee));
 
-    this.addAddress(this.address);
-    this.addAddress(this.addresstemp);
+    this.addAddress(false);
+    this.addAddress();
     
     this.form.valueChanges.subscribe(value => {
       console.log(JSON.stringify(value));
@@ -46,24 +48,19 @@ export class EmployeeFormComponent implements OnInit {
 
 
   get Addresses():FormArray {
-
     return this.form.get('addresses') as FormArray; 
   }
 
-  addAddress(add : Address) {
+  addAddress(isRemoveable:boolean = true) {
     (this.form.get('addresses') as FormArray).push(
-      this.formBuilder.group(new AddressForm(add))
+      this.formBuilder.group(new AddressForm(new Address(isRemoveable)))
     )
   }
 
-
-
   onSubmit() {
     this.submitted = true;
-
-
   }
-  deletePlayer(index: number) {
+  removeAddress(index: number) {
     (this.form.get('addresses') as FormArray).removeAt(
      index
     )

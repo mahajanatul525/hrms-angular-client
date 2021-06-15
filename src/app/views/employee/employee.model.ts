@@ -23,6 +23,11 @@ export class Address {
     state: string;
     country: string;
     addressType: string;
+    isRemoveble:boolean;
+
+    constructor(isRemoveble:boolean){
+        this.isRemoveble = isRemoveble;
+    }
 }
 
 export class Employee {

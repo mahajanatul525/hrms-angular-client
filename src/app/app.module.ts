@@ -62,6 +62,7 @@ import { EmployeeComponent } from './views/employee/employee.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { EmployeeFormComponent } from './views/employee/employee-form/employee-form.component';
 import { AddressFormComponent } from './views/employee/address-form/address-form.component';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 
 
@@ -88,7 +89,7 @@ import { AddressFormComponent } from './views/employee/address-form/address-form
     FormsModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
-    
+    TooltipModule,
     MatPaginatorModule,
     MatTableModule,
     MatSortModule,

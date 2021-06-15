@@ -9,13 +9,19 @@ import { FormGroup } from '@angular/forms';
 export class AddressFormComponent implements OnInit {
   @Input() addressForm: FormGroup
   @Input() index: number
-  @Output() deletePlayer: EventEmitter<number> = new EventEmitter()
+  @Output() removeAddress: EventEmitter<number> = new EventEmitter()
+  @Output() addAddress: EventEmitter<any> = new EventEmitter()
   constructor() { }
 
   ngOnInit() {
   }
 
   delete() {
-    this.deletePlayer.emit(this.index)
+    this.removeAddress.emit(this.index)
+  }
+
+  add()
+  {
+    this.addAddress.emit()
   }
 }

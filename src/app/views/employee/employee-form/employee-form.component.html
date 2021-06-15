@@ -70,13 +70,45 @@
                     </div>
                   </div>
                 </div>
-
-              
                 
+                <div class="row">
+                  <div class="form-group col-sm-6">
+                    <label for="city">Email (Personal)</label>
+                    <input type="text" class="form-control" id="Locality" placeholder="Email address">
+                    <div class="" *ngIf="allowUsertoAddEmail">
+                      <span dropdown class="ml-1" >
+                        <a href dropdownToggle (click)="false"><small><i   class="fa fa-plus-circle mr-1"></i>add another email</small></a>
+                          <ul *dropdownMenu class="dropdown-menu" >
+                            <li *ngFor="let choice of saluatations">
+                              <a class="dropdown-item" href="#">{{choice}}</a>
+                            </li>
+                          </ul>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="form-group col-sm-6">
+                    <label for="city">Phone (Personal)</label>
+                    <input type="text" class="form-control" id="Locality" placeholder="Phone"
+                    >
+                    <div class="" *ngIf="allowUsertoAddPhone">
+                      <span dropdown class="ml-1" >
+                        <a href dropdownToggle (click)="false"><small><i   class="fa fa-plus-circle mr-1"></i>add another phone</small></a>
+                          <ul *dropdownMenu class="dropdown-menu" >
+                            <li *ngFor="let choice of saluatations">
+                              <a class="dropdown-item" href="#">{{choice}}</a>
+                            </li>
+                          </ul>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                
+                
+
                 <div formArrayName="addresses">
                   <div *ngFor="let address of Addresses.controls; let i=index">
                     <div [formGroupName]="i">
-                      <app-address-form [index]="i" [addressForm]="address" (deletePlayer)="deletePlayer($event)"></app-address-form>
+                      <app-address-form [index]="i" [addressForm]="address" (removeAddress)="removeAddress($event)" (addAddress)="addAddress()"></app-address-form>
                     </div>
                   </div>
                 </div>
