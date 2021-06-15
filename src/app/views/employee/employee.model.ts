@@ -3,12 +3,24 @@ export class EmailAddress {
     id: number;
     type: string;
     address: string;
+    isRemoveable:Boolean;
+
+    constructor(type:string, isRemoveable:Boolean = false){
+        this.type =type;
+        this.isRemoveable = isRemoveable;
+    }
 }
 
 export class PhoneNumber {
     id: number;
     number: string;
     type: string;
+    isRemoveable:Boolean;
+
+    constructor(type:string, isRemoveable:Boolean = false){
+        this.type =type;
+        this.isRemoveable = isRemoveable;
+    }
 }
 
 export class Address {
@@ -25,8 +37,9 @@ export class Address {
     addressType: string;
     isRemoveble:boolean;
 
-    constructor(isRemoveble:boolean){
+    constructor(type:string,isRemoveble:boolean){
         this.isRemoveble = isRemoveble;
+        this.addressType = type;
     }
 }
 

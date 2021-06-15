@@ -1,8 +1,8 @@
 <form [formGroup]="addressForm" >
-  <label for="country">Address ({{addressForm.get('addressType').value}}) </label>
     <span *ngIf="addressForm.get('isRemoveble').value" > 
-      <a (click)="delete()"  tooltip="remove address" type="button" class="btn btn-default "><i style="color:red"  class="fa fa-minus-circle"></i></a>
+      <a (click)="delete()"  tooltip="remove address" type="button" class=""><i style="color:red"  class="fa fa-minus-circle"></i></a>
     </span>
+    <label for="country">Address ({{addressForm.get('addressType').value}}) </label>
   <div class="row">
     <div class="form-group col-sm-6">
       <input type="text" class="form-control" id="line1" placeholder="Flat, House no.,Building, Company, Apartment"

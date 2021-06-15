@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Component } from '@angular/core';
+import { NgModule, Component, APP_INITIALIZER } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy, CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -63,9 +63,12 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { EmployeeFormComponent } from './views/employee/employee-form/employee-form.component';
 import { AddressFormComponent } from './views/employee/address-form/address-form.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ConfigurationService } from './services/configuration.service';
 
 
-
+export function initApp(configurationService: ConfigurationService) {
+  return () => configurationService.load().toPromise();
+}
 
 
 
@@ -116,6 +119,12 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     AlertComponentCustom,
   ],
   providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initApp,
+      multi: true,
+      deps: [ConfigurationService]
+    },
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy,

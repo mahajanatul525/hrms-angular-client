@@ -73,46 +73,73 @@
                 
                 <div class="row">
                   <div class="form-group col-sm-6">
-                    <label for="city">Email (Personal)</label>
-                    <input type="text" class="form-control" id="Locality" placeholder="Email address">
-                    <div class="" *ngIf="allowUsertoAddEmail">
+                    <div *ngFor="let email of emailAddresses.controls; let i=index">
+                      <div [formGroup]="email" class="mb-1">
+                        <label for="city">Email ({{email.get('type').value}})</label>
+                        <span *ngIf="email.get('isRemoveble').value" > 
+                          <a (click)="removeEmail(i)" tooltip="remove email" type="button" class=""><small><i style="color: red;"  class="fa fa-minus-circle mr-1"></i>remove</small></a>
+                        </span>
+                        <input type="text" class="form-control" id="Locality" placeholder="Email" formControlName="address">
+                      </div>
+                    </div>
+                    <div class="" *ngIf="allowUserToAddAnotherPhone">
                       <span dropdown class="ml-1" >
                         <a href dropdownToggle (click)="false"><small><i   class="fa fa-plus-circle mr-1"></i>add another email</small></a>
                           <ul *dropdownMenu class="dropdown-menu" >
-                            <li *ngFor="let choice of saluatations">
-                              <a class="dropdown-item" href="#">{{choice}}</a>
+                            <li *ngFor="let type of emailTypes">
+                              <a class="dropdown-item"  (click)="addEmail(type)">{{type}}</a>
                             </li>
                           </ul>
                       </span>
                     </div>
-                  </div>
+                  </div>                 
                   <div class="form-group col-sm-6">
-                    <label for="city">Phone (Personal)</label>
-                    <input type="text" class="form-control" id="Locality" placeholder="Phone"
-                    >
-                    <div class="" *ngIf="allowUsertoAddPhone">
+                    <div *ngFor="let phone of phoneNumbers.controls; let i=index">
+                      <div [formGroup]="phone" class="mb-1">
+                        <span *ngIf="phone.get('isRemoveble').value" > 
+                          <a (click)="removePhone(i)" tooltip="remove phone" type="button" class=""><small><i style="color: red;"  class="fa fa-minus-circle mr-1"></i></small></a>
+                        </span>
+                        <label for="city">Phone ({{phone.get('type').value}})</label>
+                        <input type="text" class="form-control" id="Locality" placeholder="Phone" formControlName="number">
+                      </div>
+                    </div>
+                    <div class="" *ngIf="allowUserToAddAnotherPhone">
                       <span dropdown class="ml-1" >
                         <a href dropdownToggle (click)="false"><small><i   class="fa fa-plus-circle mr-1"></i>add another phone</small></a>
                           <ul *dropdownMenu class="dropdown-menu" >
-                            <li *ngFor="let choice of saluatations">
-                              <a class="dropdown-item" href="#">{{choice}}</a>
+                            <li *ngFor="let type of phoneType">
+                              <a class="dropdown-item"  (click)="addPhone(type)">{{type}}</a>
                             </li>
                           </ul>
                       </span>
                     </div>
                   </div>
                 </div>
-                
-                
-
                 <div formArrayName="addresses">
                   <div *ngFor="let address of Addresses.controls; let i=index">
                     <div [formGroupName]="i">
                       <app-address-form [index]="i" [addressForm]="address" (removeAddress)="removeAddress($event)" (addAddress)="addAddress()"></app-address-form>
                     </div>
                   </div>
+                  <div class="" *ngIf="allowUserToAddAnotherPhone">
+                    <span dropdown class="ml-1" >
+                      <a href dropdownToggle (click)="false"><small><i   class="fa fa-plus-circle mr-1"></i>add another address</small></a>
+                        <ul *dropdownMenu class="dropdown-menu" >
+                          <li *ngFor="let type of addressType">
+                            <a class="dropdown-item"  (click)="addAddress(type)">{{type}}</a>
+                          </li>
+                        </ul>
+                    </span>
+                  </div>
                 </div>
-
+                <div class="row">
+                  <div class="form-group col-sm-12">
+                    <div class=" float-right">
+                      <button type="submit" class="btn btn-primary">Save changes</button>
+                      <button class="btn btn-secondary" type="button">Cancel</button>
+                    </div>
+                  </div>
+                </div>
               </tab>
               <tab>
                 <ng-template tabHeading><i class="icon-graduation"></i> Acadamics Details &nbsp;</ng-template>
@@ -121,11 +148,6 @@
                 <ng-template tabHeading><i class="icon-briefcase"></i> Employement Details</ng-template>
               </tab>
             </tabset>
-
-            <div class="card-footer">
-              <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
-              <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
-            </div>
           </div>
         </div>
       </form>
