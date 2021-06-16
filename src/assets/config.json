@@ -1,5 +1,5 @@
 {
-    "allowUserToAddAnotherEmail":false,
-    "allowUserToAddAnotherPhone":false,
-    "allowUserToAddAnotherAddress":false
+    "allowUserToAddAnotherEmail":true,
+    "allowUserToAddAnotherPhone":true,
+    "allowUserToAddAnotherAddress":true
 }

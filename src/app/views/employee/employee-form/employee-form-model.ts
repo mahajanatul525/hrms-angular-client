@@ -14,7 +14,7 @@ export class EmployeeForm {
     createdAt = new FormControl()
     updatedAt = new FormControl()
 
-    emails = new FormArray([]);
+    emailAddresses = new FormArray([]);
     phoneNumbers = new FormArray([]);
     addresses = new FormArray([]);
 

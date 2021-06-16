@@ -1,6 +1,9 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+import { Employee } from '../views/employee/employee.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,4 +30,27 @@ export class EmployeeService {
 
     );
   }
+
+  AddEmployee(employee:Employee): Observable<any> {
+    const emp = new Employee();
+    const headers = { 'content-type': 'application/json'}  
+    const body=JSON.stringify(employee);
+    console.log(body)
+    return this.http.post(environment.endpoint_AddEmployee, employee,{'headers':headers})
+
+
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type': 'application/json',
+    //     'Accept': 'application/json'
+    //   })
+    // };
+  
+    // return this.http.post<any[]>(environment.endpoint_AddEmployee, employee, httpOptions)
+    //   .pipe(
+       
+    //   );
+  }
+  
+
 }

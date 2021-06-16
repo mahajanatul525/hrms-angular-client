@@ -41,8 +41,8 @@
                     <label for="city">Gender</label>
                     <div>
                       <div *ngFor="let gender of genders; let i=index" class="form-check form-check-inline mr-1"
-                        id="inline-radios">
-                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" [value]="gender"
+                        id="gender">
+                        <input class="form-check-input" type="radio" name="gender"  [value]="gender"
                           formControlName='gender'>
                         <label class="form-check-label" for="inlineRadio1">{{gender}}</label>
                       </div>
@@ -52,15 +52,14 @@
                     <label for="city">Marital status</label>
                     <div>
                       <div *ngFor="let status of maritalStatus; let i=index" class="form-check form-check-inline mr-1"
-                        id="inline-radios">
-                        <input class="form-check-input" type="radio" name="maritalStatus" id="inlineRadio1" [value]="status"
+                        id="maritalStatus">
+                        <input class="form-check-input" type="radio" name="maritalStatus"  [value]="status"
                           formControlName='maritalStatus'>
                         <label class="form-check-label" for="inlineRadio1">{{status}}</label>
                       </div>
                     </div>
                   </div>
                 </div>
-
                 <div class="row">
                   <div class="form-group col-sm-6">
                     <label for="birthDate">Birth Date</label>
@@ -69,17 +68,16 @@
                       <!-- <span class="help-block">Please enter a valid date</span> -->
                     </div>
                   </div>
-                </div>
-                
+                </div>                
                 <div class="row">
                   <div class="form-group col-sm-6">
                     <div *ngFor="let email of emailAddresses.controls; let i=index">
                       <div [formGroup]="email" class="mb-1">
-                        <label for="city">Email ({{email.get('type').value}})</label>
                         <span *ngIf="email.get('isRemoveble').value" > 
-                          <a (click)="removeEmail(i)" tooltip="remove email" type="button" class=""><small><i style="color: red;"  class="fa fa-minus-circle mr-1"></i>remove</small></a>
+                          <a (click)="removeEmail(i)" tooltip="remove email" type="button" class=""><small><i style="color: red;"  class="fa fa-minus-circle mr-1"></i></small></a>
                         </span>
-                        <input type="text" class="form-control" id="Locality" placeholder="Email" formControlName="address">
+                        <label for="city">Email ({{email.get('type').value}})</label>
+                        <input type="text" class="form-control" id="emailaddress" placeholder="Email" formControlName="address">
                       </div>
                     </div>
                     <div class="" *ngIf="allowUserToAddAnotherPhone">
@@ -100,7 +98,7 @@
                           <a (click)="removePhone(i)" tooltip="remove phone" type="button" class=""><small><i style="color: red;"  class="fa fa-minus-circle mr-1"></i></small></a>
                         </span>
                         <label for="city">Phone ({{phone.get('type').value}})</label>
-                        <input type="text" class="form-control" id="Locality" placeholder="Phone" formControlName="number">
+                        <input type="text" class="form-control" id="phoneNumber" placeholder="Phone" formControlName="number">
                       </div>
                     </div>
                     <div class="" *ngIf="allowUserToAddAnotherPhone">
@@ -117,9 +115,7 @@
                 </div>
                 <div formArrayName="addresses">
                   <div *ngFor="let address of Addresses.controls; let i=index">
-                    <div [formGroupName]="i">
                       <app-address-form [index]="i" [addressForm]="address" (removeAddress)="removeAddress($event)" (addAddress)="addAddress()"></app-address-form>
-                    </div>
                   </div>
                   <div class="" *ngIf="allowUserToAddAnotherPhone">
                     <span dropdown class="ml-1" >

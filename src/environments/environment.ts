@@ -6,5 +6,6 @@
 export const environment = {
   production: false,
   authorizationServerUrl:"",
-  endpoint_EmployeesBypage:'http://localhost:8084/services/employees-page/' 
+  endpoint_EmployeesBypage:'http://localhost:8084/services/employees-page/' ,
+  endpoint_AddEmployee:'http://localhost:8084/services/employee/' 
 };
